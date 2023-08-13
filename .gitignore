@@ -20,6 +20,6 @@ __pycache__/
 # Logs
 *.log
 
-#Diagrams
+# Diagrams
 LatestDiagrams/
 
