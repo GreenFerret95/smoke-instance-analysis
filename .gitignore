@@ -21,5 +21,6 @@ __pycache__/
 *.log
 
 # Diagrams
-LatestDiagrams/
-
+LatestDiagrams/combined_chart.png
+LatestDiagrams/day_of_week_chart.png
+LatestDiagrams/time_trends_chart.png

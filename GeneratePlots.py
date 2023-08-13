@@ -1,7 +1,7 @@
 import os
-
 import matplotlib.pyplot as plt
 from SmokingAnalytics import SmokingAnalytics
+from datetime import datetime  # Import datetime moduleimport os
 
 class GeneratePlots:
     def __init__(self, analytics, output_folder):
@@ -34,8 +34,18 @@ class GeneratePlots:
         count = [data["count"] for data in time_trends.values()]
         duration = [data["duration"] for data in time_trends.values()]
 
-        plt.bar(times, count, color='blue', label='Count')
-        plt.plot(times, duration, color='orange', marker='o', label='Duration (seconds)')
+        # Convert times to datetime objects for sorting
+        sorted_times = sorted([datetime.strptime(time, "%H:%M") for time in times])
+
+        # Convert sorted times back to strings
+        sorted_times_str = [time.strftime("%H:%M") for time in sorted_times]
+
+        # Reorder count and duration lists based on sorted times
+        sorted_count = [count[times.index(time)] for time in sorted_times_str]
+        sorted_duration = [duration[times.index(time)] for time in sorted_times_str]
+
+        plt.bar(sorted_times_str, sorted_count, color='blue', label='Count')
+        plt.plot(sorted_times_str, sorted_duration, color='orange', marker='o', label='Duration (seconds)')
 
         plt.xlabel('Time')
         plt.ylabel('Value')
@@ -47,6 +57,7 @@ class GeneratePlots:
         time_trends_chart_filename = os.path.join(self.output_folder, "time_trends_chart.png")
         plt.savefig(time_trends_chart_filename)
         plt.close()
+
 
     def plot_day_of_week_analysis(self):
         plt.figure(figsize=(7, 5))

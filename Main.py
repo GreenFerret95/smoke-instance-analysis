@@ -13,7 +13,7 @@ if __name__ == "__main__":
     analytics.print_analytics()
 
     if auto_generate: # new instance, auto generate
-        GeneratePlots(analytics, diagram_output_folder).geynerate_all_plots()
+        GeneratePlots(analytics, diagram_output_folder).generate_all_plots()
     else: 
         if input("Generate New Plot? (y)").lower() == 'y':
             GeneratePlots(analytics, diagram_output_folder).generate_all_plots()
